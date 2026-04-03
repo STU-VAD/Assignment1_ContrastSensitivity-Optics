@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Steam 可视化 - 终极功能齐备版</title>
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <style>
+        :root {
+            --bg: #010409;
+            --primary: #58a6ff;
+            --text-main: #f0f6fc;
+            --text-sec: #8b949e;
+        }
+
+        body {
+            background-color: var(--bg);
+            color: var(--text-main);
+            margin: 0;
+            font-family: -apple-system, system-ui, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            height: 100vh;
+            overflow-x: auto;
+        }
+
+        .header { text-align: center; padding: 25px 0; }
+        .header h1 { font-size: 2.2rem; margin: 0; font-weight: 200; color: var(--primary); letter-spacing: 4px; }
+        .header p { color: var(--text-sec); font-size: 14px; margin-top: 8px; }
+
+        #chart-wrap {
+            width: 1540px;
+            height: 780px;
+            background: rgba(13, 17, 23, 0.9);
+            border: 1px solid #30363d;
+            border-radius: 12px;
+            position: relative;
+            box-shadow: 0 50px 100px -20px rgba(0,0,0,0.7);
+            margin-bottom: 50px;
+        }
+
+        .bubble { stroke: rgba(255, 255, 255, 0.4); stroke-width: 0.5px; opacity: 0.8; transition: all 0.3s ease; }
+        .bubble:hover { stroke: #fff; stroke-width: 2px; opacity: 1; cursor: pointer; }
+
+        .game-title {
+            font-size: 11px;
+            fill: #fff;
+            pointer-events: none;
+            text-shadow: -1px -1px 2px #000, 1px -1px 2px #000, -1px 1px 2px #000, 1px 1px 2px #000;
+            font-weight: 600;
+        }
+
+        .tick text { fill: #8b949e; font-size: 10px; }
+        .tick line { stroke: #30363d; }
+        .domain { stroke: #30363d; }
+        .axis-label { fill: #8b949e; font-size: 13px; font-weight: 600; text-transform: uppercase; }
+
+        .tooltip {
+            position: absolute;
+            background: #161b22;
+            padding: 12px;
+            border-radius: 6px;
+            font-size: 12px;
+            border: 1px solid var(--primary);
+            pointer-events: none;
+            opacity: 0;
+            color: #fff;
+            z-index: 2000;
+        }
+
+        /* 颜色图例 */
+        .color-legend {
+            position: absolute;
+            top: 30px;
+            right: 30px;
+            background: rgba(22, 27, 34, 0.9);
+            padding: 15px;
+            border: 1px solid #30363d;
+            border-radius: 8px;
+        }
+        .legend-item { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; font-size: 12px; color: #f0f6fc; }
+        .legend-color { width: 12px; height: 12px; border-radius: 50%; }
+
+        /* 大小比例尺 */
+        .size-legend {
+            position: absolute;
+            bottom: 100px;
+            right: 30px;
+            background: rgba(22, 27, 34, 0.9);
+            padding: 15px;
+            border: 1px solid #30363d;
+            border-radius: 8px;
+            text-align: center;
+        }
+        .size-legend-title { font-size: 11px; color: var(--text-sec); margin-bottom: 15px; font-weight: 600; }
+        .size-ref-label { fill: #8b949e; font-size: 10px; font-family: sans-serif; }
+    </style>
+ head>
+<body>
+
+    <div class="header">
+        <h1>Steam 游戏质量分布 (全功能补全版)</h1>
+        <p>文字置顶 | 1$ 极细精度 | 右侧颜色图例 | 右下角规模比例尺</p>
+    </div>
+
+    <div id="chart-wrap">
+        <div id="tooltip" class="tooltip"></div>
+        
+        <!-- 颜色分类图例 -->
+        <div class="color-legend" id="color-legend"></div>
+
+        <!-- 气泡规模比例尺 -->
+        <div class="size-legend" id="size-legend">
+            <div class="size-legend-title">在线人数/气泡规模对照</div>
+            <svg id="size-svg" width="120" height="150"></svg>
+        </div>
+    </div>
+
+    <script>
+        const data = [
+            {"Name":"CS2","CCU":1200000,"Rating":88,"Price":0,"Tier":"免费竞技"},
+            {"Name":"Dota 2","CCU":650000,"Rating":82,"Price":0,"Tier":"免费竞技"},
+            {"Name":"PUBG","CCU":520000,"Rating":57,"Price":0,"Tier":"免费竞技"},
+            {"Name":"黑神话:悟空","CCU":380000,"Rating":96,"Price":60,"Tier":"AAA大作"},
+            {"Name":"博德之门3","CCU":210000,"Rating":96,"Price":60,"Tier":"AAA大作"},
+            {"Name":"Apex Legends","CCU":190000,"Rating":79,"Price":0,"Tier":"免费竞技"},
+            {"Name":"ELDEN RING","CCU":165000,"Rating":92,"Price":60,"Tier":"AAA大作"},
+            {"Name":"GTA V","CCU":145000,"Rating":85,"Price":30,"Tier":"AAA大作"},
+            {"Name":"Vampire Survivors","CCU":130000,"Rating":98,"Price":5,"Tier":"独立精品"},
+            {"Name":"Stardew Valley","CCU":125000,"Rating":98,"Price":15,"Tier":"独立精品"},
+            {"Name":"Cyberpunk 2077","CCU":110000,"Rating":83,"Price":60,"Tier":"AAA大作"},
+            {"Name":"Hollow Knight","CCU":95000,"Rating":97,"Price":15,"Tier":"独立精品"},
+            {"Name":"Palworld","CCU":85000,"Rating":94,"Price":30,"Tier":"中型爆款"},
+            {"Name":"Terraria","CCU":82000,"Rating":98,"Price":10,"Tier":"独立精品"},
+            {"Name":"Factroio","CCU":78000,"Rating":99,"Price":35,"Tier":"独立精品"},
+            {"Name":"Rust","CCU":75000,"Rating":87,"Price":40,"Tier":"中型爆款"},
+            {"Name":"巫师 3","CCU":74000,"Rating":97,"Price":40,"Tier":"AAA大作"},
+            {"Name":"地狱潜者 2","CCU":72000,"Rating":84,"Price":40,"Tier":"中型爆款"},
+            {"Name":"Dead by Daylight","CCU":62000,"Rating":80,"Price":20,"Tier":"中型爆款"},
+            {"Name":"RDR2","CCU":56000,"Rating":97,"Price":60,"Tier":"AAA大作"},
+            {"Name":"杀戮尖塔","CCU":54000,"Rating":97,"Price":25,"Tier":"独立精品"},
+            {"Name":"Portal 2","CCU":31000,"Rating":99,"Price":10,"Tier":"经典神作"},
+            {"Name":"Tsushima","CCU":35000,"Rating":95,"Price":60,"Tier":"AAA大作"},
+            {"Name":"Overwatch 2","CCU":61000,"Rating":45,"Price":0,"Tier":"免费竞技"}
+        ];
+
+        const wrap = document.getElementById('chart-wrap');
+        const margin = {top: 80, right: 40, bottom: 80, left: 80};
+        const width = wrap.clientWidth - margin.left - margin.right;
+        const height = wrap.clientHeight - margin.top - margin.bottom;
+
+        const svg = d3.select("#chart-wrap").append("svg")
+            .attr("width", width + margin.left + margin.right)
+            .attr("height", height + margin.top + margin.bottom)
+            .append("g").attr("transform", `translate(${margin.left},${margin.top})`);
+
+        const x = d3.scaleLinear().domain([0, 82]).range([60, width]); 
+        const y = d3.scaleLinear().domain([40, 102]).range([height, 0]);
+        const z = d3.scaleSqrt().domain([0, 1200000]).range([4, 65]);
+
+        const color = d3.scaleOrdinal()
+            .domain(["AAA大作", "独立精品", "免费竞技", "中型爆款", "经典神作"])
+            .range(["#f85149", "#3fb950", "#2f81f7", "#d29922", "#bc8cff"]);
+
+        // 绘制坐标轴
+        svg.append("g").attr("transform", `translate(0,${height})`).call(d3.axisBottom(x).ticks(82).tickFormat(d => (d % 5 === 0 ? d + "$" : "")));
+        svg.append("g").call(d3.axisLeft(y).ticks(8));
+
+        const simulation = d3.forceSimulation(data)
+            .force("cx", d3.forceX(d => x(d.Price)).strength(1.8))
+            .force("cy", d3.forceY(d => y(d.Rating)).strength(1.8))
+            .force("collide", d3.forceCollide(d => z(d.CCU) + 2))
+            .stop();
+
+        for (let i = 0; i < 600; ++i) simulation.tick();
+
+        // 绘制层级 1：气泡
+        const bubbleGroup = svg.append("g");
+        bubbleGroup.selectAll(".bubble")
+            .data(data).enter().append("circle").attr("class", "bubble")
+            .attr("cx", d => d.x).attr("cy", d => d.y).attr("r", d => z(d.CCU))
+            .style("fill", d => color(d.Tier))
+            .on("mouseover", (e, d) => {
+                d3.select("#tooltip").style("opacity", 1).html(`<b>${d.Name}</b><br/>在线: ${d.CCU.toLocaleString()}`)
+                   .style("left", (e.pageX + 15) + "px").style("top", (e.pageY - 15) + "px");
+            })
+            .on("mouseout", () => d3.select("#tooltip").style("opacity", 0));
+
+        // 绘制层级 2：标注
+        const labelGroup = svg.append("g");
+        labelGroup.selectAll(".game-title").data(data).enter().append("text").attr("class", "game-title")
+            .attr("x", d => d.x).attr("y", d => d.y).attr("dy", d => -z(d.CCU) - 6).attr("text-anchor", "middle")
+            .text(d => d.CCU > 25000 ? d.Name : "");
+
+        // 恢复颜色图例
+        const colLegend = d3.select("#color-legend");
+        ["AAA大作", "独立精品", "免费竞技", "中型爆款", "经典神作"].forEach(t => {
+            const item = colLegend.append("div").attr("class", "legend-item");
+            item.append("div").attr("class", "legend-color").style("background", color(t));
+            item.append("span").text(t);
+        });
+
+        // 绘制规模对照比例尺 (右下角)
+        const sSvg = d3.select("#size-svg");
+        const valuesToShow = [1000000, 500000, 100000];
+        const xCircle = 60, yCircle = 130;
+
+        sSvg.selectAll("circle").data(valuesToShow).enter().append("circle")
+            .attr("cx", xCircle).attr("cy", d => yCircle - z(d))
+            .attr("r", d => z(d))
+            .style("fill", "none").attr("stroke", "#8b949e").style("stroke-dasharray", ("2,2"));
+
+        sSvg.selectAll("text").data(valuesToShow).enter().append("text")
+            .attr("x", xCircle).attr("y", d => yCircle - 2 * z(d) - 5)
+            .text(d => (d/10000) + "w 人").attr("class", "size-ref-label").attr("text-anchor", "middle");
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,101 @@
+排名,游戏名称,当前在线人数,好评率_Pct,价格_USD,主标签,发行商,制作级别
+1,Counter-Strike 2,1200000,88,0,Action,Valve,免费竞技
+2,Dota 2,650000,82,0,Strategy,Valve,免费竞技
+3,PUBG: BATTLEGROUNDS,520000,57,0,Action,KRAFTON,免费竞技
+4,Black Myth: Wukong,380000,96,60,RPG,Game Science,AAA大作
+5,Baldur's Gate 3,210000,96,60,RPG,Larian Studios,AAA大作
+6,Apex Legends,190000,79,0,Action,Electronic Arts,免费竞技
+7,ELDEN RING,165000,92,60,RPG,FromSoftware,AAA大作
+8,GTA V,145000,85,30,Action,Rockstar,AAA大作
+9,Vampire Survivors,130000,98,5,Indie,poncle,独立精品
+10,Stardew Valley,125000,98,15,Simulation,ConcernedApe,独立精品
+11,Cyberpunk 2077,110000,83,60,RPG,CD PROJEKT RED,AAA大作
+12,Hollow Knight,95000,97,15,Action,Team Cherry,独立精品
+13,Palworld,85000,94,30,Survival,Pocketpair,中型爆款
+14,Terraria,82000,98,10,Sandbox,Re-Logic,独立精品
+15,Factorio,78000,99,35,Management,Wube Software,独立精品
+16,Rust,75000,87,40,Survival,Facepunch Studios,中型爆款
+17,The Witcher 3,74000,97,40,RPG,CD PROJEKT RED,AAA大作
+18,Helldivers 2,72000,84,40,Action,Sony,中型爆款
+19,Lethal Company,65000,97,10,Horror,Zeekerss,独立精品
+20,Dead by Daylight,62000,80,20,Action,Behaviour,中型爆款
+21,Overwatch 2,61000,45,0,Action,Blizzard,免费竞技
+22,God of War,58000,96,50,Action,Sony,AAA大作
+23,RDR2,56000,97,60,Action,Rockstar,AAA大作
+24,Slay the Spire,54000,97,25,Card,Mega Crit,独立精品
+25,Dave the Diver,52000,97,20,Simulation,MINTROCKET,独立精品
+26,Balatro,51000,97,15,Card,LocalThunk,独立精品
+27,Forza Horizon 5,49000,88,60,Racing,Xbox Studios,AAA大作
+28,Outer Wilds,48000,95,25,Adventure,Mobius Digital,独立精品
+29,The Sims 4,47000,88,0,Simulation,EA,免费竞技
+30,Subnautica,46000,96,30,Survival,Unknown Worlds,独立精品
+31,Civ VI,45000,92,60,Strategy,2K Games,AAA大作
+32,Sea of Thieves,44000,90,40,Action,Rare,AAA大作
+33,Hades,43000,98,25,Action,Supergiant,独立精品
+34,Team Fortress 2,42000,93,0,Action,Valve,免费竞技
+35,Monster Hunter: World,41000,90,30,Action,Capcom,AAA大作
+36,Skyrim,40000,94,40,RPG,Bethesda,AAA大作
+37,Phasmophobia,39000,96,14,Horror,Kinetic Games,独立精品
+38,Deep Rock Galactic,38000,97,30,Action,Ghost Ship,独立精品
+39,RimWorld,37000,98,35,Management,Ludeon Studios,独立精品
+40,Project Zomboid,36000,94,20,Survival,The Indie Stone,独立精品
+41,Warframe,35000,87,0,Action,Digital Extremes,免费竞技
+42,Destiny 2,34000,70,0,Action,Bungie,免费竞技
+43,Sekiro,33000,95,60,Action,FromSoftware,AAA大作
+44,Dying Light 2,32000,79,60,Action,Techland,AAA大作
+45,Portal 2,31000,99,10,Puzzle,Valve,经典神作
+46,Total War: WARHAMMER III,30000,82,60,Strategy,SEGA,AAA大作
+47,Satisfactory,29000,97,30,Management,Coffee Stain,独立精品
+48,Valheim,28000,94,20,Survival,Iron Gate,独立精品
+49,Kingdom Come: Deliverance,27000,82,30,RPG,Warhorse,中型爆款
+50,Mount & Blade II,26000,87,50,RPG,TaleWorlds,中型爆款
+51,Cities: Skylines,25000,93,30,Simulation,Paradox,独立精品
+52,Starfield,24000,60,70,RPG,Bethesda,AAA大作
+53,Cult of the Lamb,23000,94,25,Indie,Massive Monster,独立精品
+54,Papers Please,22000,97,10,Indie,3909,独立精品
+55,Disco Elysium,21000,94,40,RPG,ZA/UM,独立精品
+56,Ori and the Will of the Wisps,20000,96,30,Action,Xbox Studios,独立精品
+57,Cuphead,19000,96,20,Action,Studio MDHR,独立精品
+58,Inside,18000,96,20,Indie,Playdead,独立精品
+59,Undertale,17000,98,10,RPG,tobyfox,独立精品
+60,DOOM Eternal,16000,91,40,Action,id Software,AAA大作
+61,Microsoft Flight Simulator,15000,90,60,Simulation,Xbox Studios,AAA大作
+62,It Takes Two,14000,95,40,Action,EA,AAA大作
+63,Firewatch,13000,91,20,Adventure,Campo Santo,独立精品
+64,Celeste,12000,97,20,Platformer,Matt Makes Games,独立精品
+65,Satisfactory,11000,97,30,Management,Coffee Stain,独立精品
+66,Resident Evil 4,10000,97,60,Action,Capcom,AAA大作
+67,Final Fantasy VII Rebirth,9500,90,70,RPG,Square Enix,AAA大作
+68,Spider-Man Remastered,9000,96,60,Action,Sony,AAA大作
+69,TLOU Part I,8500,91,60,Action,Sony,AAA大作
+70,Gollum,200,34,50,Action,Daedalic,过誉惨案
+71,Skull and Bones,1500,50,70,Action,Ubisoft,过誉惨案
+72,The Day Before,50,15,40,Survival,Fntastic,过誉惨案
+73,Brotato,45000,97,5,Action,Blobfish,独立精品
+74,Back 4 Blood,4000,65,60,Action,Warner Bros.,中型爆款
+75,Ghost of Tsushima,35000,95,60,Action,Sony,AAA大作
+76,No Man's Sky,28000,78,60,Survival,Hello Games,中型爆款
+77,DayZ,26000,75,45,Survival,Bohemia,中型爆款
+78,Euro Truck Simulator 2,25000,97,20,Simulation,SCS Software,独立精品
+79,Manor Lords,24000,88,40,Strategy,Hooded Horse,中型爆款
+80,Satisfactory,23000,97,30,Management,Coffee Stain,独立精品
+81,Risk of Rain 2,22000,96,25,Action,Hopoo Games,独立精品
+82,Deep Rock Galactic,21000,97,30,Action,Ghost Ship,独立精品
+83,Content Warning,20000,92,8,Action,Landfall,独立精品
+84,War Thunder,19000,76,0,Action,Gaijin,免费竞技
+85,Genshin Impact,18000,85,0,RPG,miHoYo,免费竞技
+86,Honkai: Star Rail,17000,88,0,RPG,miHoYo,免费竞技
+87,Path of Exile,16000,89,0,RPG,Grinding Gear,免费竞技
+88,Lost Ark,15000,70,0,RPG,Smilegate,免费竞技
+89,World of Tanks,14000,78,0,Strategy,Wargaming,免费竞技
+90,Naraka: Bladepoint,13000,80,0,Action,NetEase,免费竞技
+91,Black Desert,12000,75,0,RPG,Pearl Abyss,免费竞技
+92,Destiny 2,11000,70,0,Action,Bungie,免费竞技
+93,Fall Guys,10000,82,0,Action,Epic Games,免费竞技
+94,Rocket League,9000,90,0,Action,Epic Games,免费竞技
+95,EVE Online,8000,80,0,RPG,CCP Games,免费竞技
+96,Albion Online,7000,82,0,RPG,Sandbox Interactive,免费竞技
+97,Star Trek Online,6000,75,0,RPG,Cryptic Studios,免费竞技
+98,SMITE,5000,78,0,Action,Hi-Rez Studios,免费竞技
+99,Paladins,4000,80,0,Action,Evil Mojo,免费竞技
+100,Team Fortress 2,3000,93,0,Action,Valve,免费竞技
