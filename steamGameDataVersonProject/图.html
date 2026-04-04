@@ -119,30 +119,48 @@
 
     <script>
         const data = [
-            {"Name":"CS2","CCU":1200000,"Rating":88,"Price":0,"Tier":"免费竞技"},
-            {"Name":"Dota 2","CCU":650000,"Rating":82,"Price":0,"Tier":"免费竞技"},
-            {"Name":"PUBG","CCU":520000,"Rating":57,"Price":0,"Tier":"免费竞技"},
-            {"Name":"黑神话:悟空","CCU":380000,"Rating":96,"Price":60,"Tier":"AAA大作"},
-            {"Name":"博德之门3","CCU":210000,"Rating":96,"Price":60,"Tier":"AAA大作"},
-            {"Name":"Apex Legends","CCU":190000,"Rating":79,"Price":0,"Tier":"免费竞技"},
-            {"Name":"ELDEN RING","CCU":165000,"Rating":92,"Price":60,"Tier":"AAA大作"},
-            {"Name":"GTA V","CCU":145000,"Rating":85,"Price":30,"Tier":"AAA大作"},
-            {"Name":"Vampire Survivors","CCU":130000,"Rating":98,"Price":5,"Tier":"独立精品"},
-            {"Name":"Stardew Valley","CCU":125000,"Rating":98,"Price":15,"Tier":"独立精品"},
-            {"Name":"Cyberpunk 2077","CCU":110000,"Rating":83,"Price":60,"Tier":"AAA大作"},
-            {"Name":"Hollow Knight","CCU":95000,"Rating":97,"Price":15,"Tier":"独立精品"},
-            {"Name":"Palworld","CCU":85000,"Rating":94,"Price":30,"Tier":"中型爆款"},
-            {"Name":"Terraria","CCU":82000,"Rating":98,"Price":10,"Tier":"独立精品"},
-            {"Name":"Factroio","CCU":78000,"Rating":99,"Price":35,"Tier":"独立精品"},
-            {"Name":"Rust","CCU":75000,"Rating":87,"Price":40,"Tier":"中型爆款"},
-            {"Name":"巫师 3","CCU":74000,"Rating":97,"Price":40,"Tier":"AAA大作"},
-            {"Name":"地狱潜者 2","CCU":72000,"Rating":84,"Price":40,"Tier":"中型爆款"},
-            {"Name":"Dead by Daylight","CCU":62000,"Rating":80,"Price":20,"Tier":"中型爆款"},
-            {"Name":"RDR2","CCU":56000,"Rating":97,"Price":60,"Tier":"AAA大作"},
-            {"Name":"杀戮尖塔","CCU":54000,"Rating":97,"Price":25,"Tier":"独立精品"},
-            {"Name":"Portal 2","CCU":31000,"Rating":99,"Price":10,"Tier":"经典神作"},
-            {"Name":"Tsushima","CCU":35000,"Rating":95,"Price":60,"Tier":"AAA大作"},
-            {"Name":"Overwatch 2","CCU":61000,"Rating":45,"Price":0,"Tier":"免费竞技"}
+        {"Name":"Counter-Strike: Global Offensive","CCU":1013936,"Rating":86.69,"Price":0,"Tier":"Other"},
+        {"Name":"PUBG: BATTLEGROUNDS","CCU":314682,"Rating":59.44,"Price":0,"Tier":"Other"},
+        {"Name":"Rust","CCU":143870,"Rating":87.24,"Price":39.99,"Tier":"Other"},
+        {"Name":"Apex Legends","CCU":124262,"Rating":67.14,"Price":0,"Tier":"Other"},
+        {"Name":"Wallpaper Engine","CCU":91184,"Rating":98.04,"Price":4.99,"Tier":"Other"},
+        {"Name":"Grand Theft Auto V Legacy","CCU":67851,"Rating":87.41,"Price":0,"Tier":"Other"},
+        {"Name":"Call of Duty: Modern Warfare II","CCU":67419,"Rating":58.76,"Price":38.49,"Tier":"Other"},
+        {"Name":"NARAKA: BLADEPOINT","CCU":66954,"Rating":69.54,"Price":0,"Tier":"Other"},
+        {"Name":"Baldur's Gate 3","CCU":54771,"Rating":96.85,"Price":59.99,"Tier":"Other"},
+        {"Name":"HELLDIVERS 2","CCU":53399,"Rating":76.24,"Price":39.99,"Tier":"Other"},
+        {"Name":"Tom Clancy's Rainbow Six Siege","CCU":51847,"Rating":83.86,"Price":19.99,"Tier":"Other"},
+        {"Name":"Stardew Valley","CCU":50662,"Rating":98.44,"Price":14.99,"Tier":"Other"},
+        {"Name":"War Thunder","CCU":50478,"Rating":63.99,"Price":0,"Tier":"Other"},
+        {"Name":"Dead by Daylight","CCU":44886,"Rating":79.05,"Price":19.99,"Tier":"Other"},
+        {"Name":"Team Fortress 2","CCU":43819,"Rating":89.91,"Price":0,"Tier":"Other"},
+        {"Name":"DayZ","CCU":37066,"Rating":76.78,"Price":49.99,"Tier":"Other"},
+        {"Name":"Warframe","CCU":36195,"Rating":87.05,"Price":0,"Tier":"Other"},
+        {"Name":"VRChat","CCU":34699,"Rating":75.56,"Price":0,"Tier":"Other"},
+        {"Name":"R.E.P.O.","CCU":32349,"Rating":96.51,"Price":9.99,"Tier":"Other"},
+        {"Name":"Don't Starve Together","CCU":30542,"Rating":95.26,"Price":14.99,"Tier":"Other"},
+        {"Name":"Red Dead Redemption 2","CCU":29885,"Rating":92.25,"Price":14.99,"Tier":"Other"},
+        {"Name":"ELDEN RING","CCU":29529,"Rating":92.89,"Price":59.99,"Tier":"Other"},
+        {"Name":"PAYDAY 2","CCU":27254,"Rating":89.63,"Price":9.99,"Tier":"Other"},
+        {"Name":"Sid Meier’s Civilization VI","CCU":25420,"Rating":86.89,"Price":59.99,"Tier":"Other"},
+        {"Name":"The Sims 4","CCU":25276,"Rating":87.31,"Price":0,"Tier":"Other"},
+        {"Name":"Left 4 Dead 2","CCU":25122,"Rating":97.54,"Price":9.99,"Tier":"Other"},
+        {"Name":"Destiny 2","CCU":24619,"Rating":79.58,"Price":0,"Tier":"Other"},
+        {"Name":"Terraria","CCU":24580,"Rating":97.48,"Price":9.99,"Tier":"Other"},
+        {"Name":"Project Zomboid","CCU":22864,"Rating":94.19,"Price":19.99,"Tier":"Other"},
+        {"Name":"Schedule I","CCU":22757,"Rating":98.41,"Price":19.99,"Tier":"Other"},
+        {"Name":"Cyberpunk 2077","CCU":22265,"Rating":84.39,"Price":59.99,"Tier":"Other"},
+        {"Name":"ARK: Survival Evolved","CCU":22170,"Rating":83.84,"Price":14.99,"Tier":"Other"},
+        {"Name":"Rocket League","CCU":21106,"Rating":87.35,"Price":0,"Tier":"Other"},
+        {"Name":"Garry's Mod","CCU":18400,"Rating":96.8,"Price":9.99,"Tier":"Other"},
+        {"Name":"Palworld","CCU":18028,"Rating":94.1,"Price":22.49,"Tier":"Other"},
+        {"Name":"Lost Ark","CCU":17355,"Rating":71.02,"Price":0,"Tier":"Other"},
+        {"Name":"Euro Truck Simulator 2","CCU":17281,"Rating":97.36,"Price":19.99,"Tier":"Other"},
+        {"Name":"7 Days to Die","CCU":17045,"Rating":88.61,"Price":44.99,"Tier":"Other"},
+        {"Name":"Path of Exile 2","CCU":16727,"Rating":70.12,"Price":29.99,"Tier":"Other"},
+        {"Name":"The Witcher 3: Wild Hunt","CCU":15893,"Rating":96.13,"Price":39.99,"Tier":"Other"},
+        {"Name":"Black Myth: Wukong","CCU":15004,"Rating":96.66,"Price":59.99,"Tier":"Other"},
+        {"Name":"三国杀","CCU":5000,"Rating":85,"Price":0,"Tier":"Card Game"}
         ];
 
         const wrap = document.getElementById('chart-wrap');
@@ -191,7 +209,7 @@
         const labelGroup = svg.append("g");
         labelGroup.selectAll(".game-title").data(data).enter().append("text").attr("class", "game-title")
             .attr("x", d => d.x).attr("y", d => d.y).attr("dy", d => -z(d.CCU) - 6).attr("text-anchor", "middle")
-            .text(d => d.CCU > 25000 ? d.Name : "");
+            .text(d => d.CCU > 24000 ? d.Name : "");
 
         // 恢复颜色图例
         const colLegend = d3.select("#color-legend");

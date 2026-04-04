@@ -1,101 +1,102 @@
-排名,游戏名称,当前在线人数,好评率_Pct,价格_USD,主标签,发行商,制作级别
-1,Counter-Strike 2,1200000,88,0,Action,Valve,免费竞技
-2,Dota 2,650000,82,0,Strategy,Valve,免费竞技
-3,PUBG: BATTLEGROUNDS,520000,57,0,Action,KRAFTON,免费竞技
-4,Black Myth: Wukong,380000,96,60,RPG,Game Science,AAA大作
-5,Baldur's Gate 3,210000,96,60,RPG,Larian Studios,AAA大作
-6,Apex Legends,190000,79,0,Action,Electronic Arts,免费竞技
-7,ELDEN RING,165000,92,60,RPG,FromSoftware,AAA大作
-8,GTA V,145000,85,30,Action,Rockstar,AAA大作
-9,Vampire Survivors,130000,98,5,Indie,poncle,独立精品
-10,Stardew Valley,125000,98,15,Simulation,ConcernedApe,独立精品
-11,Cyberpunk 2077,110000,83,60,RPG,CD PROJEKT RED,AAA大作
-12,Hollow Knight,95000,97,15,Action,Team Cherry,独立精品
-13,Palworld,85000,94,30,Survival,Pocketpair,中型爆款
-14,Terraria,82000,98,10,Sandbox,Re-Logic,独立精品
-15,Factorio,78000,99,35,Management,Wube Software,独立精品
-16,Rust,75000,87,40,Survival,Facepunch Studios,中型爆款
-17,The Witcher 3,74000,97,40,RPG,CD PROJEKT RED,AAA大作
-18,Helldivers 2,72000,84,40,Action,Sony,中型爆款
-19,Lethal Company,65000,97,10,Horror,Zeekerss,独立精品
-20,Dead by Daylight,62000,80,20,Action,Behaviour,中型爆款
-21,Overwatch 2,61000,45,0,Action,Blizzard,免费竞技
-22,God of War,58000,96,50,Action,Sony,AAA大作
-23,RDR2,56000,97,60,Action,Rockstar,AAA大作
-24,Slay the Spire,54000,97,25,Card,Mega Crit,独立精品
-25,Dave the Diver,52000,97,20,Simulation,MINTROCKET,独立精品
-26,Balatro,51000,97,15,Card,LocalThunk,独立精品
-27,Forza Horizon 5,49000,88,60,Racing,Xbox Studios,AAA大作
-28,Outer Wilds,48000,95,25,Adventure,Mobius Digital,独立精品
-29,The Sims 4,47000,88,0,Simulation,EA,免费竞技
-30,Subnautica,46000,96,30,Survival,Unknown Worlds,独立精品
-31,Civ VI,45000,92,60,Strategy,2K Games,AAA大作
-32,Sea of Thieves,44000,90,40,Action,Rare,AAA大作
-33,Hades,43000,98,25,Action,Supergiant,独立精品
-34,Team Fortress 2,42000,93,0,Action,Valve,免费竞技
-35,Monster Hunter: World,41000,90,30,Action,Capcom,AAA大作
-36,Skyrim,40000,94,40,RPG,Bethesda,AAA大作
-37,Phasmophobia,39000,96,14,Horror,Kinetic Games,独立精品
-38,Deep Rock Galactic,38000,97,30,Action,Ghost Ship,独立精品
-39,RimWorld,37000,98,35,Management,Ludeon Studios,独立精品
-40,Project Zomboid,36000,94,20,Survival,The Indie Stone,独立精品
-41,Warframe,35000,87,0,Action,Digital Extremes,免费竞技
-42,Destiny 2,34000,70,0,Action,Bungie,免费竞技
-43,Sekiro,33000,95,60,Action,FromSoftware,AAA大作
-44,Dying Light 2,32000,79,60,Action,Techland,AAA大作
-45,Portal 2,31000,99,10,Puzzle,Valve,经典神作
-46,Total War: WARHAMMER III,30000,82,60,Strategy,SEGA,AAA大作
-47,Satisfactory,29000,97,30,Management,Coffee Stain,独立精品
-48,Valheim,28000,94,20,Survival,Iron Gate,独立精品
-49,Kingdom Come: Deliverance,27000,82,30,RPG,Warhorse,中型爆款
-50,Mount & Blade II,26000,87,50,RPG,TaleWorlds,中型爆款
-51,Cities: Skylines,25000,93,30,Simulation,Paradox,独立精品
-52,Starfield,24000,60,70,RPG,Bethesda,AAA大作
-53,Cult of the Lamb,23000,94,25,Indie,Massive Monster,独立精品
-54,Papers Please,22000,97,10,Indie,3909,独立精品
-55,Disco Elysium,21000,94,40,RPG,ZA/UM,独立精品
-56,Ori and the Will of the Wisps,20000,96,30,Action,Xbox Studios,独立精品
-57,Cuphead,19000,96,20,Action,Studio MDHR,独立精品
-58,Inside,18000,96,20,Indie,Playdead,独立精品
-59,Undertale,17000,98,10,RPG,tobyfox,独立精品
-60,DOOM Eternal,16000,91,40,Action,id Software,AAA大作
-61,Microsoft Flight Simulator,15000,90,60,Simulation,Xbox Studios,AAA大作
-62,It Takes Two,14000,95,40,Action,EA,AAA大作
-63,Firewatch,13000,91,20,Adventure,Campo Santo,独立精品
-64,Celeste,12000,97,20,Platformer,Matt Makes Games,独立精品
-65,Satisfactory,11000,97,30,Management,Coffee Stain,独立精品
-66,Resident Evil 4,10000,97,60,Action,Capcom,AAA大作
-67,Final Fantasy VII Rebirth,9500,90,70,RPG,Square Enix,AAA大作
-68,Spider-Man Remastered,9000,96,60,Action,Sony,AAA大作
-69,TLOU Part I,8500,91,60,Action,Sony,AAA大作
-70,Gollum,200,34,50,Action,Daedalic,过誉惨案
-71,Skull and Bones,1500,50,70,Action,Ubisoft,过誉惨案
-72,The Day Before,50,15,40,Survival,Fntastic,过誉惨案
-73,Brotato,45000,97,5,Action,Blobfish,独立精品
-74,Back 4 Blood,4000,65,60,Action,Warner Bros.,中型爆款
-75,Ghost of Tsushima,35000,95,60,Action,Sony,AAA大作
-76,No Man's Sky,28000,78,60,Survival,Hello Games,中型爆款
-77,DayZ,26000,75,45,Survival,Bohemia,中型爆款
-78,Euro Truck Simulator 2,25000,97,20,Simulation,SCS Software,独立精品
-79,Manor Lords,24000,88,40,Strategy,Hooded Horse,中型爆款
-80,Satisfactory,23000,97,30,Management,Coffee Stain,独立精品
-81,Risk of Rain 2,22000,96,25,Action,Hopoo Games,独立精品
-82,Deep Rock Galactic,21000,97,30,Action,Ghost Ship,独立精品
-83,Content Warning,20000,92,8,Action,Landfall,独立精品
-84,War Thunder,19000,76,0,Action,Gaijin,免费竞技
-85,Genshin Impact,18000,85,0,RPG,miHoYo,免费竞技
-86,Honkai: Star Rail,17000,88,0,RPG,miHoYo,免费竞技
-87,Path of Exile,16000,89,0,RPG,Grinding Gear,免费竞技
-88,Lost Ark,15000,70,0,RPG,Smilegate,免费竞技
-89,World of Tanks,14000,78,0,Strategy,Wargaming,免费竞技
-90,Naraka: Bladepoint,13000,80,0,Action,NetEase,免费竞技
-91,Black Desert,12000,75,0,RPG,Pearl Abyss,免费竞技
-92,Destiny 2,11000,70,0,Action,Bungie,免费竞技
-93,Fall Guys,10000,82,0,Action,Epic Games,免费竞技
-94,Rocket League,9000,90,0,Action,Epic Games,免费竞技
-95,EVE Online,8000,80,0,RPG,CCP Games,免费竞技
-96,Albion Online,7000,82,0,RPG,Sandbox Interactive,免费竞技
-97,Star Trek Online,6000,75,0,RPG,Cryptic Studios,免费竞技
-98,SMITE,5000,78,0,Action,Hi-Rez Studios,免费竞技
-99,Paladins,4000,80,0,Action,Evil Mojo,免费竞技
-100,Team Fortress 2,3000,93,0,Action,Valve,免费竞技
+﻿Rank,Name,CCU_Current_Players,Positive_Rating_Pct,Price_USD,Primary_Tag,Publisher
+1,Counter-Strike: Global Offensive,1013936,86.69,0.0,Other,Valve
+3,PUBG: BATTLEGROUNDS,314682,59.44,0.0,Other,"KRAFTON, Inc."
+26,Rust,143870,87.24,39.99,Other,Facepunch Studios
+2,Apex Legends,124262,67.14,0.0,Other,Electronic Arts
+20,Wallpaper Engine,91184,98.04,4.99,Other,Wallpaper Engine Team
+9,Grand Theft Auto V Legacy,67851,87.41,0.0,Other,Rockstar Games
+6,Call of Duty: Modern Warfare II,67419,58.76,38.49,Other,Activision
+50,NARAKA: BLADEPOINT,66954,69.54,0.0,Other,NetEase Games Global
+21,Baldur's Gate 3,54771,96.85,59.99,Other,Larian Studios
+15,HELLDIVERS 2,53399,76.24,39.99,Other,PlayStation Publishing LLC
+25,Tom Clancy's Rainbow Six Siege,51847,83.86,19.99,Other,Ubisoft
+29,Stardew Valley,50662,98.44,14.99,Other,ConcernedApe
+13,War Thunder,50478,63.99,0.0,Other,Gaijin Network Ltd
+39,Dead by Daylight,44886,79.05,19.99,Other,Behaviour Interactive Inc.
+5,Team Fortress 2,43819,89.91,0.0,Other,Valve
+96,DayZ,37066,76.78,49.99,Other,Bohemia Interactive
+16,Warframe,36195,87.05,0.0,Other,Digital Extremes
+41,VRChat,34699,75.56,0.0,Other,VRChat Inc.
+95,R.E.P.O.,32349,96.51,9.99,Other,semiwork
+71,Don't Starve Together,30542,95.26,14.99,Other,Klei Entertainment
+58,Red Dead Redemption 2,29885,92.25,14.99,Other,Rockstar Games
+17,ELDEN RING,29529,92.89,59.99,Other,"FromSoftware, Inc., Bandai Namco Entertainment"
+33,PAYDAY 2,27254,89.63,9.99,Other,Starbreeze Entertainment
+90,Sid Meier’s Civilization VI,25420,86.89,59.99,Other,"2K, Aspyr (Mac), Aspyr (Linux)"
+69,The Sims 4,25276,87.31,0.0,Other,Electronic Arts
+10,Left 4 Dead 2,25122,97.54,9.99,Other,Valve
+24,Destiny 2,24619,79.58,0.0,Other,Bungie
+18,Terraria,24580,97.48,9.99,Other,Re-Logic
+56,Project Zomboid,22864,94.19,19.99,Other,The Indie Stone
+66,Schedule I,22757,98.41,19.99,Other,TVGS
+38,Cyberpunk 2077,22265,84.39,59.99,Other,CD PROJEKT RED
+28,ARK: Survival Evolved,22170,83.84,14.99,Other,"Studio Wildcard, Snail Games USA"
+55,Rocket League,21106,87.35,0.0,Other,Psyonix LLC
+23,Garry's Mod,18400,96.8,9.99,Other,Valve
+4,Palworld,18028,94.1,22.49,Other,Pocketpair
+12,Lost Ark,17355,71.02,0.0,Other,Amazon Games
+46,Euro Truck Simulator 2,17281,97.36,19.99,Other,SCS Software
+74,7 Days to Die,17045,88.61,44.99,Other,The Fun Pimps Entertainment LLC
+19,Path of Exile 2,16727,70.12,29.99,Other,Grinding Gear Games
+42,The Witcher 3: Wild Hunt,15893,96.13,39.99,Other,CD PROJEKT RED
+8,Black Myth: Wukong,15004,96.66,59.99,Other,Game Science
+87,Mount & Blade II: Bannerlord,14477,87.88,49.99,Other,TaleWorlds Entertainment
+47,Valheim,14439,94.32,19.99,Other,Coffee Stain Publishing
+22,Brawlhalla,14169,81.46,0.0,Other,Ubisoft
+76,eFootball,13404,47.73,0.0,Other,KONAMI
+97,Satisfactory,12596,97.16,39.99,Other,Coffee Stain Publishing
+14,Monster Hunter Wilds,12494,58.27,38.49,Other,"CAPCOM Co., Ltd."
+88,Sid Meier's Civilization V,12206,95.82,29.99,Other,"2K, Aspyr (Mac), Aspyr (Linux)"
+53,Monster Hunter: World,11923,88.01,7.79,Other,"CAPCOM Co., Ltd."
+91,Fallout 4,11179,83.12,19.99,Other,Bethesda Softworks
+11,Unturned,10408,91.2,0.0,Other,Smartly Dressed Games
+48,Phasmophobia,9978,95.82,19.99,Other,Kinetic Games
+86,Cities: Skylines,8842,92.96,29.99,Other,Paradox Interactive
+45,Borderlands 2,8551,92.44,19.99,Other,"2K, Aspyr (Mac), Aspyr (Linux)"
+27,World of Warships,8518,77.03,0.0,Other,Wargaming Group Limited
+99,Risk of Rain 2,7902,93.48,24.99,Other,Gearbox Publishing
+64,Counter-Strike,7323,97.43,9.99,Other,Valve
+83,Arma 3,7181,90.42,29.99,Other,Bohemia Interactive
+80,Sekiro: Shadows Die Twice - GOTY Edition,6767,95.29,59.99,Other,"Activision (Excluding Japan and Asia), FromSoftware, Inc. (Japan), 方块游戏 (Asia)"
+94,Battlefield V,6327,70.86,49.99,Other,Electronic Arts
+79,Hunt: Showdown 1896,6300,72.96,29.99,Other,Crytek
+57,Lethal Company,6199,97.18,9.99,Other,Zeekerss
+65,Counter-Strike: Source,6187,96.26,9.99,Other,Valve
+36,Last Epoch,5831,79.57,27.99,Other,Eleventh Hour Games
+40,Hogwarts Legacy,5716,90.22,59.99,Other,Warner Bros. Games
+63,World of Tanks Blitz,5707,78.57,0.0,Other,Wargaming Group Limited
+7,New World: Aeternum,5583,68.6,59.99,Other,Amazon Games
+101,三国杀,5000,85.0,0.0,Card Game,Shengqu Games
+72,Dying Light,4953,95.2,4.99,Other,Techland
+61,Raft,4701,93.31,19.99,Other,Axolot Games
+32,Path of Exile,4694,89.25,0.0,Other,Grinding Gear Games
+84,Sons Of The Forest,4450,87.75,29.99,Other,Newnight 
+43,Among Us,3832,91.85,4.99,Other,Innersloth
+93,"Warhammer 40,000: Rogue Trader",3582,85.57,49.99,Other,Owlcat Games
+30,The Forest,2892,95.54,19.99,Other,Endnight Games Ltd
+59,Battlefield 2042,2774,46.74,59.99,Other,Electronic Arts
+85,Grim Dawn,2376,93.74,24.99,Other,Crate Entertainment
+60,Halo Infinite,2275,69.66,0.0,Other,Xbox Game Studios
+62,SMITE,1853,78.77,0.0,Other,Hi-Rez Studios
+82,Half-Life 2,1555,97.6,9.99,Other,Valve
+100,EA SPORTS FIFA 23,1280,56.92,0.0,Other,Electronic Arts
+49,Paladins,1028,84.98,0.0,Other,Hi-Rez Studios
+78,Z1 Battle Royale,1010,55.75,0.0,Other,Daybreak Game Company
+73,Human Fall Flat,950,94.67,19.99,Other,Curve Games
+89,Trove,758,80.22,0.0,Other,gamigo US Inc.
+44,Fall Guys: Ultimate Knockout,664,81.3,0.0,Other,Ravenscourt
+68,Portal,638,98.47,9.99,Other,Valve
+52,Half-Life,634,96.54,9.99,Other,Valve
+34,Warface: Clutch,270,66.37,0.0,Other,MY.GAMES
+31,War Robots: Frontiers,256,64.15,0.0,Other,MY.GAMES
+98,NBA 2K20,221,49.87,0.0,Other,2K
+70,Black Squad,212,75.93,0.0,Other,VALOFE
+51,Half-Life 2: Deathmatch,159,90.67,19.99,Other,Valve
+92,Life is Strange 2,153,86.3,31.96,Other,"Square Enix, Feral Interactive (Mac), Feral Interactive (Linux)"
+75,Counter-Strike: Condition Zero,83,89.75,9.99,Other,Valve
+81,CyberCorp,3,82.61,9.74,Other,Megame LLC
+37,Half-Life 2: Lost Coast,2,89.25,19.99,Other,Valve
+77,Street Warriors Online,1,57.59,1.99,Other,Crazy Rocks Studios
+35,Grand Theft Auto IV: Complete Edition,0,82.48,0.0,Other,Rockstar Games
+67,Ring of Elysium,0,74.47,0.0,Other,TCH Scarlet Limited
+54,Heroes & Generals,0,67.59,0.0,Other,TLM Partners
