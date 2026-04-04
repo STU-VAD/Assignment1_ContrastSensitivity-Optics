@@ -96,7 +96,7 @@
         .size-legend-title { font-size: 11px; color: var(--text-sec); margin-bottom: 15px; font-weight: 600; }
         .size-ref-label { fill: #8b949e; font-size: 10px; font-family: sans-serif; }
     </style>
- head>
+</head>
 <body>
 
     <div class="header">
@@ -119,49 +119,714 @@
 
     <script>
         const data = [
-        {"Name":"Counter-Strike: Global Offensive","CCU":1013936,"Rating":86.69,"Price":0,"Tier":"Other"},
-        {"Name":"PUBG: BATTLEGROUNDS","CCU":314682,"Rating":59.44,"Price":0,"Tier":"Other"},
-        {"Name":"Rust","CCU":143870,"Rating":87.24,"Price":39.99,"Tier":"Other"},
-        {"Name":"Apex Legends","CCU":124262,"Rating":67.14,"Price":0,"Tier":"Other"},
-        {"Name":"Wallpaper Engine","CCU":91184,"Rating":98.04,"Price":4.99,"Tier":"Other"},
-        {"Name":"Grand Theft Auto V Legacy","CCU":67851,"Rating":87.41,"Price":0,"Tier":"Other"},
-        {"Name":"Call of Duty: Modern Warfare II","CCU":67419,"Rating":58.76,"Price":38.49,"Tier":"Other"},
-        {"Name":"NARAKA: BLADEPOINT","CCU":66954,"Rating":69.54,"Price":0,"Tier":"Other"},
-        {"Name":"Baldur's Gate 3","CCU":54771,"Rating":96.85,"Price":59.99,"Tier":"Other"},
-        {"Name":"HELLDIVERS 2","CCU":53399,"Rating":76.24,"Price":39.99,"Tier":"Other"},
-        {"Name":"Tom Clancy's Rainbow Six Siege","CCU":51847,"Rating":83.86,"Price":19.99,"Tier":"Other"},
-        {"Name":"Stardew Valley","CCU":50662,"Rating":98.44,"Price":14.99,"Tier":"Other"},
-        {"Name":"War Thunder","CCU":50478,"Rating":63.99,"Price":0,"Tier":"Other"},
-        {"Name":"Dead by Daylight","CCU":44886,"Rating":79.05,"Price":19.99,"Tier":"Other"},
-        {"Name":"Team Fortress 2","CCU":43819,"Rating":89.91,"Price":0,"Tier":"Other"},
-        {"Name":"DayZ","CCU":37066,"Rating":76.78,"Price":49.99,"Tier":"Other"},
-        {"Name":"Warframe","CCU":36195,"Rating":87.05,"Price":0,"Tier":"Other"},
-        {"Name":"VRChat","CCU":34699,"Rating":75.56,"Price":0,"Tier":"Other"},
-        {"Name":"R.E.P.O.","CCU":32349,"Rating":96.51,"Price":9.99,"Tier":"Other"},
-        {"Name":"Don't Starve Together","CCU":30542,"Rating":95.26,"Price":14.99,"Tier":"Other"},
-        {"Name":"Red Dead Redemption 2","CCU":29885,"Rating":92.25,"Price":14.99,"Tier":"Other"},
-        {"Name":"ELDEN RING","CCU":29529,"Rating":92.89,"Price":59.99,"Tier":"Other"},
-        {"Name":"PAYDAY 2","CCU":27254,"Rating":89.63,"Price":9.99,"Tier":"Other"},
-        {"Name":"Sid Meier’s Civilization VI","CCU":25420,"Rating":86.89,"Price":59.99,"Tier":"Other"},
-        {"Name":"The Sims 4","CCU":25276,"Rating":87.31,"Price":0,"Tier":"Other"},
-        {"Name":"Left 4 Dead 2","CCU":25122,"Rating":97.54,"Price":9.99,"Tier":"Other"},
-        {"Name":"Destiny 2","CCU":24619,"Rating":79.58,"Price":0,"Tier":"Other"},
-        {"Name":"Terraria","CCU":24580,"Rating":97.48,"Price":9.99,"Tier":"Other"},
-        {"Name":"Project Zomboid","CCU":22864,"Rating":94.19,"Price":19.99,"Tier":"Other"},
-        {"Name":"Schedule I","CCU":22757,"Rating":98.41,"Price":19.99,"Tier":"Other"},
-        {"Name":"Cyberpunk 2077","CCU":22265,"Rating":84.39,"Price":59.99,"Tier":"Other"},
-        {"Name":"ARK: Survival Evolved","CCU":22170,"Rating":83.84,"Price":14.99,"Tier":"Other"},
-        {"Name":"Rocket League","CCU":21106,"Rating":87.35,"Price":0,"Tier":"Other"},
-        {"Name":"Garry's Mod","CCU":18400,"Rating":96.8,"Price":9.99,"Tier":"Other"},
-        {"Name":"Palworld","CCU":18028,"Rating":94.1,"Price":22.49,"Tier":"Other"},
-        {"Name":"Lost Ark","CCU":17355,"Rating":71.02,"Price":0,"Tier":"Other"},
-        {"Name":"Euro Truck Simulator 2","CCU":17281,"Rating":97.36,"Price":19.99,"Tier":"Other"},
-        {"Name":"7 Days to Die","CCU":17045,"Rating":88.61,"Price":44.99,"Tier":"Other"},
-        {"Name":"Path of Exile 2","CCU":16727,"Rating":70.12,"Price":29.99,"Tier":"Other"},
-        {"Name":"The Witcher 3: Wild Hunt","CCU":15893,"Rating":96.13,"Price":39.99,"Tier":"Other"},
-        {"Name":"Black Myth: Wukong","CCU":15004,"Rating":96.66,"Price":59.99,"Tier":"Other"},
-        {"Name":"三国杀","CCU":5000,"Rating":85,"Price":0,"Tier":"Card Game"}
-        ];
+        {
+                "Name": "Counter-Strike: Global Offensive",
+                "CCU": 1013936,
+                "Rating": 86.69,
+                "Price": 0.0,
+                "Tier": "经典神作"
+        },
+        {
+                "Name": "PUBG: BATTLEGROUNDS",
+                "CCU": 314682,
+                "Rating": 59.44,
+                "Price": 0.0,
+                "Tier": "免费竞技"
+        },
+        {
+                "Name": "Rust",
+                "CCU": 143870,
+                "Rating": 87.24,
+                "Price": 39.99,
+                "Tier": "经典神作"
+        },
+        {
+                "Name": "Apex Legends",
+                "CCU": 124262,
+                "Rating": 67.14,
+                "Price": 0.0,
+                "Tier": "免费竞技"
+        },
+        {
+                "Name": "Wallpaper Engine",
+                "CCU": 91184,
+                "Rating": 98.04,
+                "Price": 4.99,
+                "Tier": "独立精品"
+        },
+        {
+                "Name": "Grand Theft Auto V Legacy",
+                "CCU": 67851,
+                "Rating": 87.41,
+                "Price": 0.0,
+                "Tier": "经典神作"
+        },
+        {
+                "Name": "Call of Duty: Modern Warfare II",
+                "CCU": 67419,
+                "Rating": 58.76,
+                "Price": 38.49,
+                "Tier": "AAA大作"
+        },
+        {
+                "Name": "NARAKA: BLADEPOINT",
+                "CCU": 66954,
+                "Rating": 69.54,
+                "Price": 0.0,
+                "Tier": "免费竞技"
+        },
+        {
+                "Name": "Baldur's Gate 3",
+                "CCU": 54771,
+                "Rating": 96.85,
+                "Price": 59.99,
+                "Tier": "AAA大作"
+        },
+        {
+                "Name": "HELLDIVERS 2",
+                "CCU": 53399,
+                "Rating": 76.24,
+                "Price": 39.99,
+                "Tier": "AAA大作"
+        },
+        {
+                "Name": "Tom Clancy's Rainbow Six Siege",
+                "CCU": 51847,
+                "Rating": 83.86,
+                "Price": 19.99,
+                "Tier": "中型爆款"
+        },
+        {
+                "Name": "Stardew Valley",
+                "CCU": 50662,
+                "Rating": 98.44,
+                "Price": 14.99,
+                "Tier": "独立精品"
+        },
+        {
+                "Name": "War Thunder",
+                "CCU": 50478,
+                "Rating": 63.99,
+                "Price": 0.0,
+                "Tier": "免费竞技"
+        },
+        {
+                "Name": "Dead by Daylight",
+                "CCU": 44886,
+                "Rating": 79.05,
+                "Price": 19.99,
+                "Tier": "中型爆款"
+        },
+        {
+                "Name": "Team Fortress 2",
+                "CCU": 43819,
+                "Rating": 89.91,
+                "Price": 0.0,
+                "Tier": "经典神作"
+        },
+        {
+                "Name": "DayZ",
+                "CCU": 37066,
+                "Rating": 76.78,
+                "Price": 49.99,
+                "Tier": "AAA大作"
+        },
+        {
+                "Name": "Warframe",
+                "CCU": 36195,
+                "Rating": 87.05,
+                "Price": 0.0,
+                "Tier": "中型爆款"
+        },
+        {
+                "Name": "VRChat",
+                "CCU": 34699,
+                "Rating": 75.56,
+                "Price": 0.0,
+                "Tier": "中型爆款"
+        },
+        {
+                "Name": "R.E.P.O.",
+                "CCU": 32349,
+                "Rating": 96.51,
+                "Price": 9.99,
+                "Tier": "独立精品"
+        },
+        {
+                "Name": "Don't Starve Together",
+                "CCU": 30542,
+                "Rating": 95.26,
+                "Price": 14.99,
+                "Tier": "独立精品"
+        },
+        {
+                "Name": "Red Dead Redemption 2",
+                "CCU": 29885,
+                "Rating": 92.25,
+                "Price": 14.99,
+                "Tier": "AAA大作"
+        },
+        {
+                "Name": "ELDEN RING",
+                "CCU": 29529,
+                "Rating": 92.89,
+                "Price": 59.99,
+                "Tier": "AAA大作"
+        },
+        {
+                "Name": "PAYDAY 2",
+                "CCU": 27254,
+                "Rating": 89.63,
+                "Price": 9.99,
+                "Tier": "经典神作"
+        },
+        {
+                "Name": "Sid Meier’s Civilization VI",
+                "CCU": 25420,
+                "Rating": 86.89,
+                "Price": 59.99,
+                "Tier": "经典神作"
+        },
+        {
+                "Name": "The Sims 4",
+                "CCU": 25276,
+                "Rating": 87.31,
+                "Price": 0.0,
+                "Tier": "AAA大作"
+        },
+        {
+                "Name": "Left 4 Dead 2",
+                "CCU": 25122,
+                "Rating": 97.54,
+                "Price": 9.99,
+                "Tier": "经典神作"
+        },
+        {
+                "Name": "Destiny 2",
+                "CCU": 24619,
+                "Rating": 79.58,
+                "Price": 0.0,
+                "Tier": "免费竞技"
+        },
+        {
+                "Name": "Terraria",
+                "CCU": 24580,
+                "Rating": 97.48,
+                "Price": 9.99,
+                "Tier": "经典神作"
+        },
+        {
+                "Name": "Project Zomboid",
+                "CCU": 22864,
+                "Rating": 94.19,
+                "Price": 19.99,
+                "Tier": "独立精品"
+        },
+        {
+                "Name": "Schedule I",
+                "CCU": 22757,
+                "Rating": 98.41,
+                "Price": 19.99,
+                "Tier": "独立精品"
+        },
+        {
+                "Name": "Cyberpunk 2077",
+                "CCU": 22265,
+                "Rating": 84.39,
+                "Price": 59.99,
+                "Tier": "AAA大作"
+        },
+        {
+                "Name": "ARK: Survival Evolved",
+                "CCU": 22170,
+                "Rating": 83.84,
+                "Price": 14.99,
+                "Tier": "中型爆款"
+        },
+        {
+                "Name": "Rocket League",
+                "CCU": 21106,
+                "Rating": 87.35,
+                "Price": 0.0,
+                "Tier": "免费竞技"
+        },
+        {
+                "Name": "Garry's Mod",
+                "CCU": 18400,
+                "Rating": 96.8,
+                "Price": 9.99,
+                "Tier": "独立精品"
+        },
+        {
+                "Name": "Palworld",
+                "CCU": 18028,
+                "Rating": 94.1,
+                "Price": 22.49,
+                "Tier": "独立精品"
+        },
+        {
+                "Name": "Lost Ark",
+                "CCU": 17355,
+                "Rating": 71.02,
+                "Price": 0.0,
+                "Tier": "免费竞技"
+        },
+        {
+                "Name": "Euro Truck Simulator 2",
+                "CCU": 17281,
+                "Rating": 97.36,
+                "Price": 19.99,
+                "Tier": "独立精品"
+        },
+        {
+                "Name": "7 Days to Die",
+                "CCU": 17045,
+                "Rating": 88.61,
+                "Price": 44.99,
+                "Tier": "中型爆款"
+        },
+        {
+                "Name": "Path of Exile 2",
+                "CCU": 16727,
+                "Rating": 70.12,
+                "Price": 29.99,
+                "Tier": "中型爆款"
+        },
+        {
+                "Name": "The Witcher 3: Wild Hunt",
+                "CCU": 15893,
+                "Rating": 96.13,
+                "Price": 39.99,
+                "Tier": "经典神作"
+        },
+        {
+                "Name": "Black Myth: Wukong",
+                "CCU": 15004,
+                "Rating": 96.66,
+                "Price": 59.99,
+                "Tier": "AAA大作"
+        },
+        {
+                "Name": "Mount & Blade II: Bannerlord",
+                "CCU": 14477,
+                "Rating": 87.88,
+                "Price": 49.99,
+                "Tier": "AAA大作"
+        },
+        {
+                "Name": "Valheim",
+                "CCU": 14439,
+                "Rating": 94.32,
+                "Price": 19.99,
+                "Tier": "独立精品"
+        },
+        {
+                "Name": "Brawlhalla",
+                "CCU": 14169,
+                "Rating": 81.46,
+                "Price": 0.0,
+                "Tier": "免费竞技"
+        },
+        {
+                "Name": "eFootball",
+                "CCU": 13404,
+                "Rating": 47.73,
+                "Price": 0.0,
+                "Tier": "免费竞技"
+        },
+        {
+                "Name": "Satisfactory",
+                "CCU": 12596,
+                "Rating": 97.16,
+                "Price": 39.99,
+                "Tier": "独立精品"
+        },
+        {
+                "Name": "Monster Hunter Wilds",
+                "CCU": 12494,
+                "Rating": 58.27,
+                "Price": 38.49,
+                "Tier": "AAA大作"
+        },
+        {
+                "Name": "Sid Meier's Civilization V",
+                "CCU": 12206,
+                "Rating": 95.82,
+                "Price": 29.99,
+                "Tier": "经典神作"
+        },
+        {
+                "Name": "Monster Hunter: World",
+                "CCU": 11923,
+                "Rating": 88.01,
+                "Price": 7.79,
+                "Tier": "AAA大作"
+        },
+        {
+                "Name": "Fallout 4",
+                "CCU": 11179,
+                "Rating": 83.12,
+                "Price": 19.99,
+                "Tier": "AAA大作"
+        },
+        {
+                "Name": "Unturned",
+                "CCU": 10408,
+                "Rating": 91.2,
+                "Price": 0.0,
+                "Tier": "中型爆款"
+        },
+        {
+                "Name": "Phasmophobia",
+                "CCU": 9978,
+                "Rating": 95.82,
+                "Price": 19.99,
+                "Tier": "独立精品"
+        },
+        {
+                "Name": "Cities: Skylines",
+                "CCU": 8842,
+                "Rating": 92.96,
+                "Price": 29.99,
+                "Tier": "中型爆款"
+        },
+        {
+                "Name": "Borderlands 2",
+                "CCU": 8551,
+                "Rating": 92.44,
+                "Price": 19.99,
+                "Tier": "独立精品"
+        },
+        {
+                "Name": "World of Warships",
+                "CCU": 8518,
+                "Rating": 77.03,
+                "Price": 0.0,
+                "Tier": "免费竞技"
+        },
+        {
+                "Name": "Risk of Rain 2",
+                "CCU": 7902,
+                "Rating": 93.48,
+                "Price": 24.99,
+                "Tier": "独立精品"
+        },
+        {
+                "Name": "Counter-Strike",
+                "CCU": 7323,
+                "Rating": 97.43,
+                "Price": 9.99,
+                "Tier": "经典神作"
+        },
+        {
+                "Name": "Arma 3",
+                "CCU": 7181,
+                "Rating": 90.42,
+                "Price": 29.99,
+                "Tier": "中型爆款"
+        },
+        {
+                "Name": "Sekiro: Shadows Die Twice - GOTY Edition",
+                "CCU": 6767,
+                "Rating": 95.29,
+                "Price": 59.99,
+                "Tier": "AAA大作"
+        },
+        {
+                "Name": "Battlefield V",
+                "CCU": 6327,
+                "Rating": 70.86,
+                "Price": 49.99,
+                "Tier": "AAA大作"
+        },
+        {
+                "Name": "Hunt: Showdown 1896",
+                "CCU": 6300,
+                "Rating": 72.96,
+                "Price": 29.99,
+                "Tier": "中型爆款"
+        },
+        {
+                "Name": "Lethal Company",
+                "CCU": 6199,
+                "Rating": 97.18,
+                "Price": 9.99,
+                "Tier": "独立精品"
+        },
+        {
+                "Name": "Counter-Strike: Source",
+                "CCU": 6187,
+                "Rating": 96.26,
+                "Price": 9.99,
+                "Tier": "经典神作"
+        },
+        {
+                "Name": "Last Epoch",
+                "CCU": 5831,
+                "Rating": 79.57,
+                "Price": 27.99,
+                "Tier": "独立精品"
+        },
+        {
+                "Name": "Hogwarts Legacy",
+                "CCU": 5716,
+                "Rating": 90.22,
+                "Price": 59.99,
+                "Tier": "AAA大作"
+        },
+        {
+                "Name": "World of Tanks Blitz",
+                "CCU": 5707,
+                "Rating": 78.57,
+                "Price": 0.0,
+                "Tier": "免费竞技"
+        },
+        {
+                "Name": "New World: Aeternum",
+                "CCU": 5583,
+                "Rating": 68.6,
+                "Price": 59.99,
+                "Tier": "中型爆款"
+        },
+        {
+                "Name": "三国杀",
+                "CCU": 5000,
+                "Rating": 85.0,
+                "Price": 0.0,
+                "Tier": "独立精品"
+        },
+        {
+                "Name": "Dying Light",
+                "CCU": 4953,
+                "Rating": 95.2,
+                "Price": 4.99,
+                "Tier": "独立精品"
+        },
+        {
+                "Name": "Raft",
+                "CCU": 4701,
+                "Rating": 93.31,
+                "Price": 19.99,
+                "Tier": "独立精品"
+        },
+        {
+                "Name": "Path of Exile",
+                "CCU": 4694,
+                "Rating": 89.25,
+                "Price": 0.0,
+                "Tier": "中型爆款"
+        },
+        {
+                "Name": "Sons Of The Forest",
+                "CCU": 4450,
+                "Rating": 87.75,
+                "Price": 29.99,
+                "Tier": "中型爆款"
+        },
+        {
+                "Name": "Among Us",
+                "CCU": 3832,
+                "Rating": 91.85,
+                "Price": 4.99,
+                "Tier": "独立精品"
+        },
+        {
+                "Name": "Warhammer 40,000: Rogue Trader",
+                "CCU": 3582,
+                "Rating": 85.57,
+                "Price": 49.99,
+                "Tier": "AAA大作"
+        },
+        {
+                "Name": "The Forest",
+                "CCU": 2892,
+                "Rating": 95.54,
+                "Price": 19.99,
+                "Tier": "独立精品"
+        },
+        {
+                "Name": "Battlefield 2042",
+                "CCU": 2774,
+                "Rating": 46.74,
+                "Price": 59.99,
+                "Tier": "AAA大作"
+        },
+        {
+                "Name": "Grim Dawn",
+                "CCU": 2376,
+                "Rating": 93.74,
+                "Price": 24.99,
+                "Tier": "独立精品"
+        },
+        {
+                "Name": "Halo Infinite",
+                "CCU": 2275,
+                "Rating": 69.66,
+                "Price": 0.0,
+                "Tier": "免费竞技"
+        },
+        {
+                "Name": "SMITE",
+                "CCU": 1853,
+                "Rating": 78.77,
+                "Price": 0.0,
+                "Tier": "免费竞技"
+        },
+        {
+                "Name": "Half-Life 2",
+                "CCU": 1555,
+                "Rating": 97.6,
+                "Price": 9.99,
+                "Tier": "经典神作"
+        },
+        {
+                "Name": "EA SPORTS FIFA 23",
+                "CCU": 1280,
+                "Rating": 56.92,
+                "Price": 0.0,
+                "Tier": "AAA大作"
+        },
+        {
+                "Name": "Paladins",
+                "CCU": 1028,
+                "Rating": 84.98,
+                "Price": 0.0,
+                "Tier": "免费竞技"
+        },
+        {
+                "Name": "Z1 Battle Royale",
+                "CCU": 1010,
+                "Rating": 55.75,
+                "Price": 0.0,
+                "Tier": "免费竞技"
+        },
+        {
+                "Name": "Human Fall Flat",
+                "CCU": 950,
+                "Rating": 94.67,
+                "Price": 19.99,
+                "Tier": "独立精品"
+        },
+        {
+                "Name": "Trove",
+                "CCU": 758,
+                "Rating": 80.22,
+                "Price": 0.0,
+                "Tier": "中型爆款"
+        },
+        {
+                "Name": "Fall Guys: Ultimate Knockout",
+                "CCU": 664,
+                "Rating": 81.3,
+                "Price": 0.0,
+                "Tier": "独立精品"
+        },
+        {
+                "Name": "Portal",
+                "CCU": 638,
+                "Rating": 98.47,
+                "Price": 9.99,
+                "Tier": "经典神作"
+        },
+        {
+                "Name": "Half-Life",
+                "CCU": 634,
+                "Rating": 96.54,
+                "Price": 9.99,
+                "Tier": "经典神作"
+        },
+        {
+                "Name": "Warface: Clutch",
+                "CCU": 270,
+                "Rating": 66.37,
+                "Price": 0.0,
+                "Tier": "免费竞技"
+        },
+        {
+                "Name": "War Robots: Frontiers",
+                "CCU": 256,
+                "Rating": 64.15,
+                "Price": 0.0,
+                "Tier": "免费竞技"
+        },
+        {
+                "Name": "NBA 2K20",
+                "CCU": 221,
+                "Rating": 49.87,
+                "Price": 0.0,
+                "Tier": "免费竞技"
+        },
+        {
+                "Name": "Black Squad",
+                "CCU": 212,
+                "Rating": 75.93,
+                "Price": 0.0,
+                "Tier": "免费竞技"
+        },
+        {
+                "Name": "Half-Life 2: Deathmatch",
+                "CCU": 159,
+                "Rating": 90.67,
+                "Price": 19.99,
+                "Tier": "中型爆款"
+        },
+        {
+                "Name": "Life is Strange 2",
+                "CCU": 153,
+                "Rating": 86.3,
+                "Price": 31.96,
+                "Tier": "独立精品"
+        },
+        {
+                "Name": "Counter-Strike: Condition Zero",
+                "CCU": 83,
+                "Rating": 89.75,
+                "Price": 9.99,
+                "Tier": "经典神作"
+        },
+        {
+                "Name": "CyberCorp",
+                "CCU": 3,
+                "Rating": 82.61,
+                "Price": 9.74,
+                "Tier": "独立精品"
+        },
+        {
+                "Name": "Half-Life 2: Lost Coast",
+                "CCU": 2,
+                "Rating": 89.25,
+                "Price": 19.99,
+                "Tier": "中型爆款"
+        },
+        {
+                "Name": "Street Warriors Online",
+                "CCU": 1,
+                "Rating": 57.59,
+                "Price": 1.99,
+                "Tier": "独立精品"
+        },
+        {
+                "Name": "Grand Theft Auto IV: Complete Edition",
+                "CCU": 0,
+                "Rating": 82.48,
+                "Price": 0.0,
+                "Tier": "经典神作"
+        },
+        {
+                "Name": "Ring of Elysium",
+                "CCU": 0,
+                "Rating": 74.47,
+                "Price": 0.0,
+                "Tier": "免费竞技"
+        },
+        {
+                "Name": "Heroes & Generals",
+                "CCU": 0,
+                "Rating": 67.59,
+                "Price": 0.0,
+                "Tier": "免费竞技"
+        }
+];
 
         const wrap = document.getElementById('chart-wrap');
         const margin = {top: 80, right: 40, bottom: 80, left: 80};
@@ -200,10 +865,20 @@
             .attr("cx", d => d.x).attr("cy", d => d.y).attr("r", d => z(d.CCU))
             .style("fill", d => color(d.Tier))
             .on("mouseover", (e, d) => {
-                d3.select("#tooltip").style("opacity", 1).html(`<b>${d.Name}</b><br/>在线: ${d.CCU.toLocaleString()}`)
-                   .style("left", (e.pageX + 15) + "px").style("top", (e.pageY - 15) + "px");
+                d3.select("#tooltip")
+                    .style("opacity", 1)
+                    .html(`<b>${d.Name}</b><br/>在线: ${d.CCU.toLocaleString()}`);
             })
-            .on("mouseout", () => d3.select("#tooltip").style("opacity", 0));
+
+            .on("mousemove", (e, d) => {
+                d3.select("#tooltip")
+                    .style("left", (e.pageX + 15) + "px")
+                    .style("top", (e.pageY - 15) + "px");
+            })
+
+            .on("mouseout", () => {
+                d3.select("#tooltip").style("opacity", 0);
+            });
 
         // 绘制层级 2：标注
         const labelGroup = svg.append("g");
