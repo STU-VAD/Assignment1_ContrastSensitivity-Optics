@@ -1,0 +1,1071 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Steam 在线前100游戏数据可视化 - 柱状图</title>
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <style>
+        :root {
+            --bg: #08111f;
+            --panel: rgba(10, 18, 32, 0.94);
+            --panel-border: rgba(148, 163, 184, 0.25);
+            --text-main: #e5eef9;
+            --text-sec: #94a3b8;
+            --accent: #7dd3fc;
+            --grid: rgba(148, 163, 184, 0.16);
+        }
+
+        * { box-sizing: border-box; }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            font-family: "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+            background:
+                radial-gradient(circle at top left, rgba(125, 211, 252, 0.14), transparent 34%),
+                radial-gradient(circle at 85% 15%, rgba(248, 113, 113, 0.12), transparent 28%),
+                linear-gradient(180deg, #020817 0%, #08111f 55%, #030712 100%);
+            color: var(--text-main);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 0 24px 40px;
+        }
+
+        .header {
+            width: min(1680px, 100%);
+            padding: 32px 0 20px;
+        }
+
+        .header h1 {
+            margin: 0;
+            font-size: clamp(2rem, 2.4vw, 3rem);
+            font-weight: 700;
+            letter-spacing: 0.04em;
+            color: var(--accent);
+        }
+
+        .header p {
+            margin: 12px 0 0;
+            color: var(--text-sec);
+            font-size: 15px;
+            line-height: 1.6;
+        }
+
+        .dashboard {
+            width: min(1680px, 100%);
+            display: grid;
+            grid-template-columns: minmax(0, 1fr) 280px;
+            gap: 20px;
+            align-items: start;
+        }
+
+        #chart-wrap {
+            background: var(--panel);
+            border: 1px solid var(--panel-border);
+            border-radius: 20px;
+            position: relative;
+            box-shadow: 0 32px 80px rgba(2, 8, 23, 0.48);
+            overflow: hidden;
+        }
+
+        #chart-scroll {
+            height: 82vh;
+            min-height: 900px;
+            overflow-y: auto;
+            overflow-x: hidden;
+        }
+
+        .side-panel {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            position: sticky;
+            top: 24px;
+        }
+
+        .panel-card {
+            background: rgba(10, 18, 32, 0.9);
+            border: 1px solid var(--panel-border);
+            border-radius: 18px;
+            padding: 18px;
+            box-shadow: 0 22px 50px rgba(2, 8, 23, 0.3);
+        }
+
+        .panel-card h2 {
+            margin: 0 0 14px;
+            font-size: 15px;
+            color: var(--accent);
+            letter-spacing: 0.04em;
+        }
+
+        .stats-grid { display: grid; gap: 12px; }
+
+        .stat-item {
+            padding: 12px 14px;
+            background: rgba(148, 163, 184, 0.08);
+            border: 1px solid rgba(148, 163, 184, 0.12);
+            border-radius: 14px;
+        }
+
+        .stat-label {
+            display: block;
+            color: var(--text-sec);
+            font-size: 12px;
+            margin-bottom: 6px;
+        }
+
+        .stat-value {
+            font-size: 22px;
+            font-weight: 700;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 13px;
+            color: var(--text-main);
+            margin-bottom: 10px;
+        }
+
+        .legend-item:last-child { margin-bottom: 0; }
+
+        .legend-color {
+            width: 14px;
+            height: 14px;
+            border-radius: 4px;
+            flex: 0 0 auto;
+        }
+
+        .bar { transition: opacity 0.2s ease; }
+        .bar:hover { opacity: 0.88; }
+
+        .axis text { fill: var(--text-sec); font-size: 11px; }
+        .axis line, .axis path { stroke: rgba(148, 163, 184, 0.32); }
+        .grid line { stroke: var(--grid); stroke-dasharray: 4 6; }
+        .grid path { stroke: none; }
+
+        .chart-title { fill: var(--text-main); font-size: 22px; font-weight: 700; }
+        .chart-subtitle { fill: var(--text-sec); font-size: 13px; }
+        .axis-label { fill: var(--text-sec); font-size: 12px; font-weight: 600; letter-spacing: 0.04em; }
+
+        .tooltip {
+            position: fixed;
+            max-width: 260px;
+            background: rgba(15, 23, 42, 0.96);
+            border: 1px solid rgba(125, 211, 252, 0.5);
+            border-radius: 12px;
+            padding: 12px 14px;
+            pointer-events: none;
+            opacity: 0;
+            transform: translateY(6px);
+            transition: opacity 0.15s ease, transform 0.15s ease;
+            color: var(--text-main);
+            box-shadow: 0 14px 36px rgba(2, 8, 23, 0.45);
+            z-index: 20;
+        }
+
+        .tooltip strong {
+            display: block;
+            margin-bottom: 8px;
+            color: var(--accent);
+            line-height: 1.4;
+        }
+
+        .tooltip-row {
+            display: flex;
+            justify-content: space-between;
+            gap: 12px;
+            font-size: 12px;
+            margin-top: 4px;
+        }
+
+        .tooltip-row span:first-child { color: var(--text-sec); }
+
+        @media (max-width: 1200px) {
+            .dashboard { grid-template-columns: 1fr; }
+            .side-panel { position: static; order: -1; }
+            #chart-scroll { height: 75vh; }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>Steam 在线前100游戏数据可视化 - 柱状图</h1>
+    </div>
+
+    <div class="dashboard">
+        <div id="chart-wrap">
+            <div id="chart-scroll"></div>
+        </div>
+
+        <aside class="side-panel">
+            <div class="panel-card">
+                <h2>数据概览</h2>
+                <div class="stats-grid" id="stats"></div>
+            </div>
+
+            <div class="panel-card">
+                <h2>Tier 图例</h2>
+                <div id="legend"></div>
+            </div>
+        </aside>
+    </div>
+
+    <div id="tooltip" class="tooltip"></div>
+
+    <script>
+        const data = [
+        {
+                "Name": "Counter-Strike: Global Offensive",
+                "CCU": 1013936,
+                "Rating": 86.69,
+                "Price": 0.0,
+                "Tier": "经典神作"
+        },
+        {
+                "Name": "PUBG: BATTLEGROUNDS",
+                "CCU": 314682,
+                "Rating": 59.44,
+                "Price": 0.0,
+                "Tier": "免费竞技"
+        },
+        {
+                "Name": "Rust",
+                "CCU": 143870,
+                "Rating": 87.24,
+                "Price": 39.99,
+                "Tier": "经典神作"
+        },
+        {
+                "Name": "Apex Legends",
+                "CCU": 124262,
+                "Rating": 67.14,
+                "Price": 0.0,
+                "Tier": "免费竞技"
+        },
+        {
+                "Name": "Wallpaper Engine",
+                "CCU": 91184,
+                "Rating": 98.04,
+                "Price": 4.99,
+                "Tier": "独立精品"
+        },
+        {
+                "Name": "Grand Theft Auto V Legacy",
+                "CCU": 67851,
+                "Rating": 87.41,
+                "Price": 0.0,
+                "Tier": "经典神作"
+        },
+        {
+                "Name": "Call of Duty: Modern Warfare II",
+                "CCU": 67419,
+                "Rating": 58.76,
+                "Price": 38.49,
+                "Tier": "AAA大作"
+        },
+        {
+                "Name": "NARAKA: BLADEPOINT",
+                "CCU": 66954,
+                "Rating": 69.54,
+                "Price": 0.0,
+                "Tier": "免费竞技"
+        },
+        {
+                "Name": "Baldur's Gate 3",
+                "CCU": 54771,
+                "Rating": 96.85,
+                "Price": 59.99,
+                "Tier": "AAA大作"
+        },
+        {
+                "Name": "HELLDIVERS 2",
+                "CCU": 53399,
+                "Rating": 76.24,
+                "Price": 39.99,
+                "Tier": "AAA大作"
+        },
+        {
+                "Name": "Tom Clancy's Rainbow Six Siege",
+                "CCU": 51847,
+                "Rating": 83.86,
+                "Price": 19.99,
+                "Tier": "中型爆款"
+        },
+        {
+                "Name": "Stardew Valley",
+                "CCU": 50662,
+                "Rating": 98.44,
+                "Price": 14.99,
+                "Tier": "独立精品"
+        },
+        {
+                "Name": "War Thunder",
+                "CCU": 50478,
+                "Rating": 63.99,
+                "Price": 0.0,
+                "Tier": "免费竞技"
+        },
+        {
+                "Name": "Dead by Daylight",
+                "CCU": 44886,
+                "Rating": 79.05,
+                "Price": 19.99,
+                "Tier": "中型爆款"
+        },
+        {
+                "Name": "Team Fortress 2",
+                "CCU": 43819,
+                "Rating": 89.91,
+                "Price": 0.0,
+                "Tier": "经典神作"
+        },
+        {
+                "Name": "DayZ",
+                "CCU": 37066,
+                "Rating": 76.78,
+                "Price": 49.99,
+                "Tier": "AAA大作"
+        },
+        {
+                "Name": "Warframe",
+                "CCU": 36195,
+                "Rating": 87.05,
+                "Price": 0.0,
+                "Tier": "中型爆款"
+        },
+        {
+                "Name": "VRChat",
+                "CCU": 34699,
+                "Rating": 75.56,
+                "Price": 0.0,
+                "Tier": "中型爆款"
+        },
+        {
+                "Name": "R.E.P.O.",
+                "CCU": 32349,
+                "Rating": 96.51,
+                "Price": 9.99,
+                "Tier": "独立精品"
+        },
+        {
+                "Name": "Don't Starve Together",
+                "CCU": 30542,
+                "Rating": 95.26,
+                "Price": 14.99,
+                "Tier": "独立精品"
+        },
+        {
+                "Name": "Red Dead Redemption 2",
+                "CCU": 29885,
+                "Rating": 92.25,
+                "Price": 14.99,
+                "Tier": "AAA大作"
+        },
+        {
+                "Name": "ELDEN RING",
+                "CCU": 29529,
+                "Rating": 92.89,
+                "Price": 59.99,
+                "Tier": "AAA大作"
+        },
+        {
+                "Name": "PAYDAY 2",
+                "CCU": 27254,
+                "Rating": 89.63,
+                "Price": 9.99,
+                "Tier": "经典神作"
+        },
+        {
+                "Name": "Sid Meier’s Civilization VI",
+                "CCU": 25420,
+                "Rating": 86.89,
+                "Price": 59.99,
+                "Tier": "经典神作"
+        },
+        {
+                "Name": "The Sims 4",
+                "CCU": 25276,
+                "Rating": 87.31,
+                "Price": 0.0,
+                "Tier": "AAA大作"
+        },
+        {
+                "Name": "Left 4 Dead 2",
+                "CCU": 25122,
+                "Rating": 97.54,
+                "Price": 9.99,
+                "Tier": "经典神作"
+        },
+        {
+                "Name": "Destiny 2",
+                "CCU": 24619,
+                "Rating": 79.58,
+                "Price": 0.0,
+                "Tier": "免费竞技"
+        },
+        {
+                "Name": "Terraria",
+                "CCU": 24580,
+                "Rating": 97.48,
+                "Price": 9.99,
+                "Tier": "经典神作"
+        },
+        {
+                "Name": "Project Zomboid",
+                "CCU": 22864,
+                "Rating": 94.19,
+                "Price": 19.99,
+                "Tier": "独立精品"
+        },
+        {
+                "Name": "Schedule I",
+                "CCU": 22757,
+                "Rating": 98.41,
+                "Price": 19.99,
+                "Tier": "独立精品"
+        },
+        {
+                "Name": "Cyberpunk 2077",
+                "CCU": 22265,
+                "Rating": 84.39,
+                "Price": 59.99,
+                "Tier": "AAA大作"
+        },
+        {
+                "Name": "ARK: Survival Evolved",
+                "CCU": 22170,
+                "Rating": 83.84,
+                "Price": 14.99,
+                "Tier": "中型爆款"
+        },
+        {
+                "Name": "Rocket League",
+                "CCU": 21106,
+                "Rating": 87.35,
+                "Price": 0.0,
+                "Tier": "免费竞技"
+        },
+        {
+                "Name": "Garry's Mod",
+                "CCU": 18400,
+                "Rating": 96.8,
+                "Price": 9.99,
+                "Tier": "独立精品"
+        },
+        {
+                "Name": "Palworld",
+                "CCU": 18028,
+                "Rating": 94.1,
+                "Price": 22.49,
+                "Tier": "独立精品"
+        },
+        {
+                "Name": "Lost Ark",
+                "CCU": 17355,
+                "Rating": 71.02,
+                "Price": 0.0,
+                "Tier": "免费竞技"
+        },
+        {
+                "Name": "Euro Truck Simulator 2",
+                "CCU": 17281,
+                "Rating": 97.36,
+                "Price": 19.99,
+                "Tier": "独立精品"
+        },
+        {
+                "Name": "7 Days to Die",
+                "CCU": 17045,
+                "Rating": 88.61,
+                "Price": 44.99,
+                "Tier": "中型爆款"
+        },
+        {
+                "Name": "Path of Exile 2",
+                "CCU": 16727,
+                "Rating": 70.12,
+                "Price": 29.99,
+                "Tier": "中型爆款"
+        },
+        {
+                "Name": "The Witcher 3: Wild Hunt",
+                "CCU": 15893,
+                "Rating": 96.13,
+                "Price": 39.99,
+                "Tier": "经典神作"
+        },
+        {
+                "Name": "Black Myth: Wukong",
+                "CCU": 15004,
+                "Rating": 96.66,
+                "Price": 59.99,
+                "Tier": "AAA大作"
+        },
+        {
+                "Name": "Mount & Blade II: Bannerlord",
+                "CCU": 14477,
+                "Rating": 87.88,
+                "Price": 49.99,
+                "Tier": "AAA大作"
+        },
+        {
+                "Name": "Valheim",
+                "CCU": 14439,
+                "Rating": 94.32,
+                "Price": 19.99,
+                "Tier": "独立精品"
+        },
+        {
+                "Name": "Brawlhalla",
+                "CCU": 14169,
+                "Rating": 81.46,
+                "Price": 0.0,
+                "Tier": "免费竞技"
+        },
+        {
+                "Name": "eFootball",
+                "CCU": 13404,
+                "Rating": 47.73,
+                "Price": 0.0,
+                "Tier": "免费竞技"
+        },
+        {
+                "Name": "Satisfactory",
+                "CCU": 12596,
+                "Rating": 97.16,
+                "Price": 39.99,
+                "Tier": "独立精品"
+        },
+        {
+                "Name": "Monster Hunter Wilds",
+                "CCU": 12494,
+                "Rating": 58.27,
+                "Price": 38.49,
+                "Tier": "AAA大作"
+        },
+        {
+                "Name": "Sid Meier's Civilization V",
+                "CCU": 12206,
+                "Rating": 95.82,
+                "Price": 29.99,
+                "Tier": "经典神作"
+        },
+        {
+                "Name": "Monster Hunter: World",
+                "CCU": 11923,
+                "Rating": 88.01,
+                "Price": 7.79,
+                "Tier": "AAA大作"
+        },
+        {
+                "Name": "Fallout 4",
+                "CCU": 11179,
+                "Rating": 83.12,
+                "Price": 19.99,
+                "Tier": "AAA大作"
+        },
+        {
+                "Name": "Unturned",
+                "CCU": 10408,
+                "Rating": 91.2,
+                "Price": 0.0,
+                "Tier": "中型爆款"
+        },
+        {
+                "Name": "Phasmophobia",
+                "CCU": 9978,
+                "Rating": 95.82,
+                "Price": 19.99,
+                "Tier": "独立精品"
+        },
+        {
+                "Name": "Cities: Skylines",
+                "CCU": 8842,
+                "Rating": 92.96,
+                "Price": 29.99,
+                "Tier": "中型爆款"
+        },
+        {
+                "Name": "Borderlands 2",
+                "CCU": 8551,
+                "Rating": 92.44,
+                "Price": 19.99,
+                "Tier": "独立精品"
+        },
+        {
+                "Name": "World of Warships",
+                "CCU": 8518,
+                "Rating": 77.03,
+                "Price": 0.0,
+                "Tier": "免费竞技"
+        },
+        {
+                "Name": "Risk of Rain 2",
+                "CCU": 7902,
+                "Rating": 93.48,
+                "Price": 24.99,
+                "Tier": "独立精品"
+        },
+        {
+                "Name": "Counter-Strike",
+                "CCU": 7323,
+                "Rating": 97.43,
+                "Price": 9.99,
+                "Tier": "经典神作"
+        },
+        {
+                "Name": "Arma 3",
+                "CCU": 7181,
+                "Rating": 90.42,
+                "Price": 29.99,
+                "Tier": "中型爆款"
+        },
+        {
+                "Name": "Sekiro: Shadows Die Twice - GOTY Edition",
+                "CCU": 6767,
+                "Rating": 95.29,
+                "Price": 59.99,
+                "Tier": "AAA大作"
+        },
+        {
+                "Name": "Battlefield V",
+                "CCU": 6327,
+                "Rating": 70.86,
+                "Price": 49.99,
+                "Tier": "AAA大作"
+        },
+        {
+                "Name": "Hunt: Showdown 1896",
+                "CCU": 6300,
+                "Rating": 72.96,
+                "Price": 29.99,
+                "Tier": "中型爆款"
+        },
+        {
+                "Name": "Lethal Company",
+                "CCU": 6199,
+                "Rating": 97.18,
+                "Price": 9.99,
+                "Tier": "独立精品"
+        },
+        {
+                "Name": "Counter-Strike: Source",
+                "CCU": 6187,
+                "Rating": 96.26,
+                "Price": 9.99,
+                "Tier": "经典神作"
+        },
+        {
+                "Name": "Last Epoch",
+                "CCU": 5831,
+                "Rating": 79.57,
+                "Price": 27.99,
+                "Tier": "独立精品"
+        },
+        {
+                "Name": "Hogwarts Legacy",
+                "CCU": 5716,
+                "Rating": 90.22,
+                "Price": 59.99,
+                "Tier": "AAA大作"
+        },
+        {
+                "Name": "World of Tanks Blitz",
+                "CCU": 5707,
+                "Rating": 78.57,
+                "Price": 0.0,
+                "Tier": "免费竞技"
+        },
+        {
+                "Name": "New World: Aeternum",
+                "CCU": 5583,
+                "Rating": 68.6,
+                "Price": 59.99,
+                "Tier": "中型爆款"
+        },
+        {
+                "Name": "三国杀",
+                "CCU": 5000,
+                "Rating": 85.0,
+                "Price": 0.0,
+                "Tier": "独立精品"
+        },
+        {
+                "Name": "Dying Light",
+                "CCU": 4953,
+                "Rating": 95.2,
+                "Price": 4.99,
+                "Tier": "独立精品"
+        },
+        {
+                "Name": "Raft",
+                "CCU": 4701,
+                "Rating": 93.31,
+                "Price": 19.99,
+                "Tier": "独立精品"
+        },
+        {
+                "Name": "Path of Exile",
+                "CCU": 4694,
+                "Rating": 89.25,
+                "Price": 0.0,
+                "Tier": "中型爆款"
+        },
+        {
+                "Name": "Sons Of The Forest",
+                "CCU": 4450,
+                "Rating": 87.75,
+                "Price": 29.99,
+                "Tier": "中型爆款"
+        },
+        {
+                "Name": "Among Us",
+                "CCU": 3832,
+                "Rating": 91.85,
+                "Price": 4.99,
+                "Tier": "独立精品"
+        },
+        {
+                "Name": "Warhammer 40,000: Rogue Trader",
+                "CCU": 3582,
+                "Rating": 85.57,
+                "Price": 49.99,
+                "Tier": "AAA大作"
+        },
+        {
+                "Name": "The Forest",
+                "CCU": 2892,
+                "Rating": 95.54,
+                "Price": 19.99,
+                "Tier": "独立精品"
+        },
+        {
+                "Name": "Battlefield 2042",
+                "CCU": 2774,
+                "Rating": 46.74,
+                "Price": 59.99,
+                "Tier": "AAA大作"
+        },
+        {
+                "Name": "Grim Dawn",
+                "CCU": 2376,
+                "Rating": 93.74,
+                "Price": 24.99,
+                "Tier": "独立精品"
+        },
+        {
+                "Name": "Halo Infinite",
+                "CCU": 2275,
+                "Rating": 69.66,
+                "Price": 0.0,
+                "Tier": "免费竞技"
+        },
+        {
+                "Name": "SMITE",
+                "CCU": 1853,
+                "Rating": 78.77,
+                "Price": 0.0,
+                "Tier": "免费竞技"
+        },
+        {
+                "Name": "Half-Life 2",
+                "CCU": 1555,
+                "Rating": 97.6,
+                "Price": 9.99,
+                "Tier": "经典神作"
+        },
+        {
+                "Name": "EA SPORTS FIFA 23",
+                "CCU": 1280,
+                "Rating": 56.92,
+                "Price": 0.0,
+                "Tier": "AAA大作"
+        },
+        {
+                "Name": "Paladins",
+                "CCU": 1028,
+                "Rating": 84.98,
+                "Price": 0.0,
+                "Tier": "免费竞技"
+        },
+        {
+                "Name": "Z1 Battle Royale",
+                "CCU": 1010,
+                "Rating": 55.75,
+                "Price": 0.0,
+                "Tier": "免费竞技"
+        },
+        {
+                "Name": "Human Fall Flat",
+                "CCU": 950,
+                "Rating": 94.67,
+                "Price": 19.99,
+                "Tier": "独立精品"
+        },
+        {
+                "Name": "Trove",
+                "CCU": 758,
+                "Rating": 80.22,
+                "Price": 0.0,
+                "Tier": "中型爆款"
+        },
+        {
+                "Name": "Fall Guys: Ultimate Knockout",
+                "CCU": 664,
+                "Rating": 81.3,
+                "Price": 0.0,
+                "Tier": "独立精品"
+        },
+        {
+                "Name": "Portal",
+                "CCU": 638,
+                "Rating": 98.47,
+                "Price": 9.99,
+                "Tier": "经典神作"
+        },
+        {
+                "Name": "Half-Life",
+                "CCU": 634,
+                "Rating": 96.54,
+                "Price": 9.99,
+                "Tier": "经典神作"
+        },
+        {
+                "Name": "Warface: Clutch",
+                "CCU": 270,
+                "Rating": 66.37,
+                "Price": 0.0,
+                "Tier": "免费竞技"
+        },
+        {
+                "Name": "War Robots: Frontiers",
+                "CCU": 256,
+                "Rating": 64.15,
+                "Price": 0.0,
+                "Tier": "免费竞技"
+        },
+        {
+                "Name": "NBA 2K20",
+                "CCU": 221,
+                "Rating": 49.87,
+                "Price": 0.0,
+                "Tier": "免费竞技"
+        },
+        {
+                "Name": "Black Squad",
+                "CCU": 212,
+                "Rating": 75.93,
+                "Price": 0.0,
+                "Tier": "免费竞技"
+        },
+        {
+                "Name": "Half-Life 2: Deathmatch",
+                "CCU": 159,
+                "Rating": 90.67,
+                "Price": 19.99,
+                "Tier": "中型爆款"
+        },
+        {
+                "Name": "Life is Strange 2",
+                "CCU": 153,
+                "Rating": 86.3,
+                "Price": 31.96,
+                "Tier": "独立精品"
+        },
+        {
+                "Name": "Counter-Strike: Condition Zero",
+                "CCU": 83,
+                "Rating": 89.75,
+                "Price": 9.99,
+                "Tier": "经典神作"
+        },
+        {
+                "Name": "CyberCorp",
+                "CCU": 3,
+                "Rating": 82.61,
+                "Price": 9.74,
+                "Tier": "独立精品"
+        },
+        {
+                "Name": "Half-Life 2: Lost Coast",
+                "CCU": 2,
+                "Rating": 89.25,
+                "Price": 19.99,
+                "Tier": "中型爆款"
+        },
+        {
+                "Name": "Street Warriors Online",
+                "CCU": 1,
+                "Rating": 57.59,
+                "Price": 1.99,
+                "Tier": "独立精品"
+        },
+        {
+                "Name": "Grand Theft Auto IV: Complete Edition",
+                "CCU": 0,
+                "Rating": 82.48,
+                "Price": 0.0,
+                "Tier": "经典神作"
+        },
+        {
+                "Name": "Ring of Elysium",
+                "CCU": 0,
+                "Rating": 74.47,
+                "Price": 0.0,
+                "Tier": "免费竞技"
+        },
+        {
+                "Name": "Heroes & Generals",
+                "CCU": 0,
+                "Rating": 67.59,
+                "Price": 0.0,
+                "Tier": "免费竞技"
+        }
+];
+
+        const color = d3.scaleOrdinal()
+            .domain(["AAA大作", "独立精品", "免费竞技", "中型爆款", "经典神作"])
+            .range(["#f87171", "#34d399", "#60a5fa", "#fbbf24", "#c084fc"]);
+
+        const sortedData = [...data].sort((a, b) => d3.descending(a.CCU, b.CCU));
+        const tooltip = d3.select("#tooltip");
+        const chartWrap = document.getElementById("chart-wrap");
+
+        const rowHeight = 28;
+        const margin = { top: 90, right: 130, bottom: 70, left: 270 };
+        const width = Math.max(chartWrap.clientWidth, 1080) - margin.left - margin.right;
+        const height = sortedData.length * rowHeight;
+
+        const svg = d3.select("#chart-scroll")
+            .append("svg")
+            .attr("width", width + margin.left + margin.right)
+            .attr("height", height + margin.top + margin.bottom);
+
+        const g = svg.append("g")
+            .attr("transform", `translate(${margin.left},${margin.top})`);
+
+        const x = d3.scaleLinear()
+            .domain([0, d3.max(sortedData, d => d.CCU)]).nice()
+            .range([0, width]);
+
+        const y = d3.scaleBand()
+            .domain(sortedData.map(d => d.Name))
+            .range([0, height])
+            .padding(0.22);
+
+        g.append("g")
+            .attr("class", "grid")
+            .call(d3.axisTop(x)
+                .ticks(8)
+                .tickSize(-height)
+                .tickFormat(d => d3.format(",")(d)))
+            .call(g => g.selectAll("text").remove());
+
+        g.append("g")
+            .attr("class", "axis")
+            .call(d3.axisLeft(y).tickSize(0))
+            .call(g => g.selectAll("text")
+                .attr("dx", "-0.4em")
+                .style("font-size", "11px"))
+            .call(g => g.select(".domain").remove());
+
+        g.append("g")
+            .attr("class", "axis")
+            .call(d3.axisTop(x)
+                .ticks(8)
+                .tickFormat(d => d3.format(",")(d)));
+
+        g.selectAll(".bar")
+            .data(sortedData)
+            .enter()
+            .append("rect")
+            .attr("class", "bar")
+            .attr("x", 0)
+            .attr("y", d => y(d.Name))
+            .attr("height", y.bandwidth())
+            .attr("width", 0)
+            .attr("rx", 6)
+            .attr("fill", d => color(d.Tier))
+            .on("mousemove", function (event, d) {
+                tooltip
+                    .style("opacity", 1)
+                    .style("transform", "translateY(0)")
+                    .style("left", `${event.clientX + 16}px`)
+                    .style("top", `${event.clientY + 16}px`)
+                    .html(`
+                        <strong>${d.Name}</strong>
+                        <div class="tooltip-row"><span>Tier</span><span>${d.Tier}</span></div>
+                        <div class="tooltip-row"><span>CCU</span><span>${d.CCU.toLocaleString()}</span></div>
+                        <div class="tooltip-row"><span>Rating</span><span>${d.Rating}%</span></div>
+                        <div class="tooltip-row"><span>Price</span><span>${d.Price === 0 ? 'Free' : '$' + d.Price}</span></div>
+                    `);
+                d3.select(this).attr("opacity", 0.88);
+            })
+            .on("mouseleave", function () {
+                tooltip.style("opacity", 0).style("transform", "translateY(6px)");
+                d3.select(this).attr("opacity", 1);
+            })
+            .transition()
+            .duration(900)
+            .delay((_, index) => Math.min(index * 18, 1000))
+            .attr("width", d => x(d.CCU));
+
+        g.selectAll(".value-label")
+            .data(sortedData)
+            .enter()
+            .append("text")
+            .attr("x", d => x(d.CCU) + 8)
+            .attr("y", d => y(d.Name) + y.bandwidth() / 2)
+            .attr("dy", "0.35em")
+            .attr("fill", "#cbd5e1")
+            .style("font-size", "10px")
+            .text(d => d3.format(",")(d.CCU));
+
+        svg.append("text")
+            .attr("class", "chart-title")
+            .attr("x", margin.left)
+            .attr("y", 38)
+            .text("按同时在线人数排序的 Steam 游戏横向柱状图");
+
+        svg.append("text")
+            .attr("class", "chart-subtitle")
+            .attr("x", margin.left)
+            .attr("y", 62)
+            .text("柱长表示 CCU，颜色表示 Tier，评分和价格在提示框中显示");
+
+        svg.append("text")
+            .attr("class", "axis-label")
+            .attr("x", margin.left + width / 2)
+            .attr("y", height + margin.top + 48)
+            .attr("text-anchor", "middle")
+            .text("同时在线人数（CCU）");
+
+        const stats = [
+            { label: "游戏数量", value: sortedData.length.toLocaleString() },
+            { label: "最高 CCU", value: d3.format(",")(d3.max(sortedData, d => d.CCU)) },
+            { label: "平均评分", value: `${d3.mean(sortedData, d => d.Rating).toFixed(2)}%` },
+            { label: "免费游戏占比", value: `${(sortedData.filter(d => d.Price === 0).length / sortedData.length * 100).toFixed(1)}%` }
+        ];
+
+        d3.select("#stats")
+            .selectAll(".stat-item")
+            .data(stats)
+            .enter()
+            .append("div")
+            .attr("class", "stat-item")
+            .html(d => `<span class="stat-label">${d.label}</span><span class="stat-value">${d.value}</span>`);
+
+        d3.select("#legend")
+            .selectAll(".legend-item")
+            .data(color.domain())
+            .enter()
+            .append("div")
+            .attr("class", "legend-item")
+            .html(d => `<span class="legend-color" style="background:${color(d)}"></span><span>${d}</span>`);
+    </script>
+</body>
+</html>
